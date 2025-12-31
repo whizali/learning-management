@@ -9,10 +9,30 @@ const isTeacherRoute = createRouteMatcher([
   '/teacher(.*)',
 ]);
 
+const isOnboardingRoute = createRouteMatcher([
+  '/setup',
+]);
+
+const isAuthRoute = createRouteMatcher([
+  '/signin(.*)',
+  '/signup(.*)',
+]);
+
 
 export default clerkMiddleware(async (auth, req) => {
-  const { sessionClaims } = await auth();
-  const userRole = (sessionClaims?.metadata as { userType: 'student' | 'teacher' })?.userType || 'student';
+  const { sessionClaims, userId } = await auth();
+  const userRole = (sessionClaims?.metadata as { userType: 'student' | 'teacher' })?.userType;
+
+  // Allow access to auth routes and onboarding setup
+  if (isAuthRoute(req) || isOnboardingRoute(req)) {
+    return NextResponse.next();
+  }
+
+  // If user is authenticated but hasn't selected a user type, redirect to setup
+  if (userId && !userRole && !isOnboardingRoute(req)) {
+    const url = new URL('/setup', req.url);
+    return NextResponse.redirect(url);
+  }
 
   if (isStudentRoute(req)) {
     if (userRole !== 'student') {
@@ -23,7 +43,7 @@ export default clerkMiddleware(async (auth, req) => {
 
   if (isTeacherRoute(req)) {
     if (userRole !== 'teacher') {
-      const url = new URL('/student/courses', req.url)
+      const url = new URL('/user/courses', req.url)
       return NextResponse.redirect(url)
     }
   }

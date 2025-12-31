@@ -16,12 +16,18 @@ const SignUpComponent = () => {
         if (isCheckoutPage) {
             return `/checkout?step=2&id=${courseId}&showSignUp=false`;
         }
+        
         const userType = user?.publicMetadata?.userType as string;
+        
+        // If user doesn't have a userType, redirect to setup page
+        if (!userType) {
+            return `/setup`;
+        }
         
         if (userType === "teacher") {
             return `/teacher/courses`;
         }
-        return `/student/courses`;
+        return `/user/courses`;
     }
 
 

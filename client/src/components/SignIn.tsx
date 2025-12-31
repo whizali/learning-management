@@ -17,10 +17,15 @@ const SignInComponent = () => {
     }
         const userType = user?.publicMetadata?.userType as string;
         
+        // If user doesn't have a userType, redirect to setup page
+        if (!userType) {
+            return `/setup`;
+        }
+        
         if (userType === "teacher") {
             return `/teacher/courses`;
         }
-        return `/student/courses`;
+        return `/user/courses`;
     }
 
   return (

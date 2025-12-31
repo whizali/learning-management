@@ -1,4 +1,5 @@
 import SharedNotificationSettings from "@/components/SharedNotificationSettings";
+import UserTypeSwitcher from "@/components/UserTypeSwitcher";
 import React from "react";
 
 const TeacherSettings = () => {
@@ -8,6 +9,7 @@ const TeacherSettings = () => {
         title="Teacher Settings"
         subtitle="Manage your teacher notification settings"
       />
+      <UserTypeSwitcher />
     </div>
   );
 };

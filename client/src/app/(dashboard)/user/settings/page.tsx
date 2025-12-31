@@ -1,4 +1,5 @@
 import SharedNotificationSettings from "@/components/SharedNotificationSettings";
+import UserTypeSwitcher from "@/components/UserTypeSwitcher";
 import React from "react";
 
 const UserSettings = () => {
@@ -8,6 +9,7 @@ const UserSettings = () => {
         title="User Settings"
         subtitle="Manage your user notification settings"
       />
+      <UserTypeSwitcher />
     </div>
   );
 };
