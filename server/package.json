@@ -1,0 +1,53 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && npx tsc && npm run copy-data",
+    "copy-data": "mkdir -p dist/seed && cp -r src/seed/data dist/seed/ || (mkdir dist\\seed 2>nul & xcopy /E /I src\\seed\\data dist\\seed\\data)",
+    "start": "npm run build && node dist/index.js",
+    "start:prod": "node dist/index.js",
+    "dev": "npm run build && concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
+    "dev:clean": "npm run clean && npm run dev",
+    "clean": "rimraf dist",
+    "type-check": "npx tsc --noEmit",
+    "seed": "npm run build && node dist/seed/seedDynamodb.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.955.0",
+    "@clerk/express": "^1.7.60",
+    "@types/multer": "^2.0.0",
+    "aws-sdk": "^2.1693.0",
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "dynamoose": "^4.0.4",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "pluralize": "^8.0.0",
+    "serverless-http": "^4.0.0",
+    "stripe": "^20.1.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.0.3",
+    "@types/pluralize": "^0.0.33",
+    "@types/uuid": "^11.0.0",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.11",
+    "rimraf": "^6.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
