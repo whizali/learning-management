@@ -41,24 +41,10 @@ const Courses = () => {
 
   // Calculate stats
   const totalCourses = courses?.length || 0;
-  const inProgressCourses = courses?.filter(c => {
-    const progress = c.sections?.reduce((acc, section) => {
-      const completed = section.chapters?.filter(ch => ch.completed).length || 0;
-      const total = section.chapters?.length || 0;
-      return acc + (total > 0 ? completed / total : 0);
-    }, 0) || 0;
-    const totalSections = c.sections?.length || 1;
-    return progress > 0 && progress < totalSections;
-  }).length || 0;
-  
-  const completedCourses = courses?.filter(c => {
-    const progress = c.sections?.reduce((acc, section) => {
-      const completed = section.chapters?.filter(ch => ch.completed).length || 0;
-      const total = section.chapters?.length || 0;
-      return acc + (total > 0 && completed === total ? 1 : 0);
-    }, 0) || 0;
-    return progress === (c.sections?.length || 0);
-  }).length || 0;
+  // Note: Progress tracking would require fetching UserCourseProgress for each course
+  // For now, showing simple stats based on enrollment
+  const inProgressCourses = 0; // TODO: Implement with progress data
+  const completedCourses = 0; // TODO: Implement with progress data
 
   const handleGoToCourse = (course: Course) => {
     if (
