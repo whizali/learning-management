@@ -10,8 +10,8 @@ const CourseCardSearch = ({course, isSelected, onClick}: SearchCourseCardProps) 
             </div>
             <div className='course-card-search__content'>
                 <div>
-                <h2 className='course-card-search__title'>{course.title}</h2>
-                <p className='course-card-search__description'>{course.description}</p>
+                <h2 className='text-neutral-300 font-semibold'>{course.title}</h2>
+                <p className='text-neutral-500'>{course.description}</p>
                 </div>
             </div>
             <div className="mt-2">

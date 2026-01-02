@@ -3,7 +3,6 @@
 import React from "react";
 import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUpdateUserMutation } from "@/state/api";
 import { toast } from "sonner";
 import { RefreshCw } from "lucide-react";
@@ -47,42 +46,37 @@ const UserTypeSwitcher = () => {
   }
 
   return (
-    <Card className="mt-6">
-      <CardHeader>
-        <CardTitle className="text-lg">Developer: Switch User Type</CardTitle>
-        <CardDescription>
-          For testing purposes, you can switch between student and teacher roles
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-medium">Current Role: <span className="capitalize font-bold">{currentUserType}</span></p>
-            <p className="text-xs text-gray-500 mt-1">
-              Switch to {currentUserType === "teacher" ? "student" : "teacher"} to test different features
-            </p>
-          </div>
-          <Button
-            onClick={handleSwitchUserType}
-            disabled={isLoading}
-            variant="outline"
-            className="gap-2"
-          >
-            {isLoading ? (
-              <>
-                <RefreshCw className="w-4 h-4 animate-spin" />
-                Switching...
-              </>
-            ) : (
-              <>
-                <RefreshCw className="w-4 h-4" />
-                Switch to {currentUserType === "teacher" ? "Student" : "Teacher"}
-              </>
-            )}
-          </Button>
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+      <div className="space-y-1">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Current Role:</span>
+          <span className="px-3 py-1 text-sm font-bold capitalize bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full">
+            {currentUserType}
+          </span>
         </div>
-      </CardContent>
-    </Card>
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          Switch to {currentUserType === "teacher" ? "student" : "teacher"} mode to test different features and permissions
+        </p>
+      </div>
+      <Button
+        onClick={handleSwitchUserType}
+        disabled={isLoading}
+        variant="outline"
+        className="gap-2 shrink-0"
+      >
+        {isLoading ? (
+          <>
+            <RefreshCw className="w-4 h-4 animate-spin" />
+            Switching...
+          </>
+        ) : (
+          <>
+            <RefreshCw className="w-4 h-4" />
+            Switch to {currentUserType === "teacher" ? "Student" : "Teacher"}
+          </>
+        )}
+      </Button>
+    </div>
   );
 };
 

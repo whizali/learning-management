@@ -59,13 +59,13 @@ const SharedNotificationSettings = ({
 
   return (
     <div className="notification-settings">
-      <Header title={title} subtitle={subtitle} />
+      {title && <Header title={title} subtitle={subtitle} />}
       <Form {...methods}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
-          className="notification-settings__form"
+          className="space-y-6"
         >
-          <div className="notification-settings__fields">
+          <div className="space-y-4">
             <CustomFormField
               name="courseNotifications"
               label="Course Notifications"
@@ -94,8 +94,8 @@ const SharedNotificationSettings = ({
             />
           </div>
 
-          <Button type="submit" className="notification-settings__submit">
-            Update Settings
+          <Button type="submit" className="w-full sm:w-auto">
+            Save Preferences
           </Button>
         </form>
       </Form>

@@ -27,22 +27,21 @@ const NonDashboardNavbar = () => {
           </div>
         </div>
          <div className='nondashboard-navbar__actions'>
-            <button className='nondashboard-navbar__notification-button'>
-                <span className="nondashboard-navbar__notification-indicator"></span>
-                <Bell className='nondashboard-navbar__notification-icon' size={18}/>
-            </button>
+            
             {/* sign in button */}
 
             <SignedIn>
-              <UserButton showName={true} userProfileMode='navigation' appearance={{
-                elements: {
-                  userButtonPopoverCard: {
-                    backgroundColor: 'customgreys-primarybg',
+              <div className='flex items-center gap-4 px-4 py-2 bg-white rounded-full shadow-sm'>
+                <UserButton showName={true} userProfileMode='navigation' appearance={{
+                  elements: {
+                    userButtonPopoverCard: {
+                      backgroundColor: 'customgreys-primarybg',
+                    },
                   },
-                },
-              }} userProfileUrl={
-                userRole === "teacher" ? "/teacher/profile" : "/user/profile"
-              } />
+                }} userProfileUrl={
+                  userRole === "teacher" ? "/teacher/profile" : "/user/profile"
+                } />
+              </div>
             </SignedIn>
 
             <SignedOut>
